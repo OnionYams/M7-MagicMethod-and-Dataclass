@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from xmlrpc.client import boolean
 
 @dataclass
 class MeteoriteFinding:
@@ -31,3 +32,29 @@ with open("Meteorite_Landings.csv","r",newline='',encoding="utf-8-sig") as csvfi
         findings.append(finding)
 
 print(findings[0] > findings[10])
+
+
+@dataclass
+class Orders:
+    OrderID: int
+    CustomerID: int
+    SalesPersonID: int
+    ContactPersonID: int
+    BackorderOrderID: int
+    OrderDate: "date"
+    ExpectedDeliveryDate: "date"
+    CustomerPurchaseOrderNumber: str
+    IsUndersupplyBackOrder: bool
+    Comments: str
+    DeliveryInstructions: str
+    InternalComments: str
+    PickingCompleteWhen: "date"
+    LastEditedBy: int
+    LastEditedWhen: "date"
+
+    def __gt__(self,other):
+            return self.OrderID > other.OrderID
+    def __eq__(self,other):
+            return self.OrderID == other.OrderID
+    def __ge__(self,other):
+            return self.OrderID >= other.OrderID
